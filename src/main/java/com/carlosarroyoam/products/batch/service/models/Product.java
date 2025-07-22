@@ -1,15 +1,11 @@
 package com.carlosarroyoam.products.batch.service.models;
 
 import java.math.BigDecimal;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class Product {
   private String index;
   private String title;
