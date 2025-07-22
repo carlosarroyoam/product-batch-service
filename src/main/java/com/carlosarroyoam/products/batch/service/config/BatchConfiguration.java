@@ -57,9 +57,4 @@ public class BatchConfiguration {
         .beanMapped()
         .build();
   }
-
-  @Bean
-  ProductItemProcessor processor() {
-    return new ProductItemProcessor();
-  }
 }
