@@ -21,9 +21,9 @@ public class JobCompletionNotificationListener implements JobExecutionListener {
   @Override
   public void afterJob(JobExecution jobExecution) {
     if (jobExecution.getStatus() == BatchStatus.COMPLETED) {
-      log.info("Job finished");
       Integer count = jdbcTemplate.queryForObject("SELECT count(id) FROM products", Integer.class);
-      log.info("Records: {}", count);
+      log.info("Job finished");
+      log.info("Total inserted records: {}", count);
     }
   }
 }
