@@ -2,10 +2,8 @@ package com.carlosarroyoam.products.batch.service.models;
 
 import java.math.BigDecimal;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 public class Product {
   private String index;
   private String title;
