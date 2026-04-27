@@ -1,4 +1,4 @@
-package com.carlosarroyoam.batch_service;
+package com.carlosarroyoam.products.batch.service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
