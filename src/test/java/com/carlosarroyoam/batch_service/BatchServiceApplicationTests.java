@@ -6,6 +6,5 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class BatchServiceApplicationTests {
   @Test
-  void contextLoads() {
-  }
+  void contextLoads() {}
 }

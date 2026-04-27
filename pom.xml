@@ -7,22 +7,21 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.5.13</version>
+    <version>3.5.14</version>
     <relativePath /> <!-- lookup parent from repository -->
   </parent>
 
   <groupId>com.carlosarroyoam</groupId>
-  <artifactId>batch-service</artifactId>
+  <artifactId>product-batch-service</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>products-batch-service</name>
-  <description>CSV to Database products batch service</description>
+  <name>product-batch-service</name>
+  <description>CSV to database products batch service</description>
 
   <properties>
     <java.version>17</java.version>
   </properties>
 
   <dependencies>
-
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter</artifactId>
@@ -63,18 +62,6 @@
   <build>
     <plugins>
       <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-        <configuration>
-          <excludes>
-            <exclude>
-              <groupId>org.projectlombok</groupId>
-              <artifactId>lombok</artifactId>
-            </exclude>
-          </excludes>
-        </configuration>
-      </plugin>
-      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
@@ -84,6 +71,19 @@
               <artifactId>lombok</artifactId>
             </path>
           </annotationProcessorPaths>
+          <release>${java.version}</release>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <excludes>
+            <exclude>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+            </exclude>
+          </excludes>
         </configuration>
       </plugin>
     </plugins>

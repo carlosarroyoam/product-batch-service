@@ -1,6 +1,5 @@
-package com.carlosarroyoam.products.batch.service.processors;
+package com.carlosarroyoam.products.batch.service.products;
 
-import com.carlosarroyoam.products.batch.service.models.Product;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemProcessor;

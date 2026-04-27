@@ -1,8 +1,8 @@
-package com.carlosarroyoam.products.batch.service.config;
+package com.carlosarroyoam.products.batch.service.core.config;
 
 import com.carlosarroyoam.products.batch.service.listeners.JobCompletionNotificationListener;
-import com.carlosarroyoam.products.batch.service.models.Product;
-import com.carlosarroyoam.products.batch.service.processors.ProductItemProcessor;
+import com.carlosarroyoam.products.batch.service.products.Product;
+import com.carlosarroyoam.products.batch.service.products.ProductItemProcessor;
 import javax.sql.DataSource;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -21,16 +21,20 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 @Configuration
 public class BatchConfiguration {
   @Bean
-  Job csvToDbJob(JobRepository jobRepository, Step step,
-      JobCompletionNotificationListener listener) {
+  Job csvToDbJob(
+      JobRepository jobRepository, Step step, JobCompletionNotificationListener listener) {
     return new JobBuilder("csvToDbJob", jobRepository).listener(listener).start(step).build();
   }
 
   @Bean
-  Step step(JobRepository jobRepository, DataSourceTransactionManager transactionManager,
-      FlatFileItemReader<Product> reader, ProductItemProcessor processor,
+  Step step(
+      JobRepository jobRepository,
+      DataSourceTransactionManager transactionManager,
+      FlatFileItemReader<Product> reader,
+      ProductItemProcessor processor,
       JdbcBatchItemWriter<Product> writer) {
-    return new StepBuilder("step1", jobRepository).<Product, Product>chunk(100, transactionManager)
+    return new StepBuilder("step1", jobRepository)
+        .<Product, Product>chunk(100, transactionManager)
         .reader(reader)
         .processor(processor)
         .writer(writer)
@@ -39,20 +43,37 @@ public class BatchConfiguration {
 
   @Bean
   FlatFileItemReader<Product> reader() {
-    return new FlatFileItemReaderBuilder<Product>().name("productItemReader")
+    return new FlatFileItemReaderBuilder<Product>()
+        .name("productItemReader")
         .resource(new ClassPathResource("csv/products.csv"))
         .linesToSkip(1)
         .delimited()
-        .names("Index", "Title", "Description", "Brand", "Category", "Price", "Currency", "Stock",
-            "EAN", "Color", "Size", "Availability", "Internal ID")
+        .names(
+            "Index",
+            "Title",
+            "Description",
+            "Brand",
+            "Category",
+            "Price",
+            "Currency",
+            "Stock",
+            "EAN",
+            "Color",
+            "Size",
+            "Availability",
+            "Internal ID")
         .targetType(Product.class)
         .build();
   }
 
   @Bean
   JdbcBatchItemWriter<Product> writer(DataSource datasource) {
-    return new JdbcBatchItemWriterBuilder<Product>().sql(
-        "INSERT INTO products (title, description, brand, category, price, currency, stock, ean, color, size, availability) VALUES (:title, :description, :brand, :category, :price, :currency, :stock, :ean, :color, :size, :availability)")
+    return new JdbcBatchItemWriterBuilder<Product>()
+        .sql(
+            """
+			INSERT INTO products (title, description, brand, category, price, currency, stock, ean, color, size, availability)
+			VALUES (:title, :description, :brand, :category, :price, :currency, :stock, :ean, :color, :size, :availability)
+			""")
         .dataSource(datasource)
         .beanMapped()
         .build();
