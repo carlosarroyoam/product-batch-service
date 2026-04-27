@@ -1,13 +1,11 @@
 package com.carlosarroyoam.products.batch.service.products;
 
 import java.math.BigDecimal;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Builder
 public class Product {
   private String index;
   private String title;

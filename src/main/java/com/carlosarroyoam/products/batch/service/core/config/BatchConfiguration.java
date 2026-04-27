@@ -1,8 +1,8 @@
 package com.carlosarroyoam.products.batch.service.core.config;
 
-import com.carlosarroyoam.products.batch.service.listeners.JobCompletionNotificationListener;
 import com.carlosarroyoam.products.batch.service.products.Product;
 import com.carlosarroyoam.products.batch.service.products.ProductItemProcessor;
+import com.carlosarroyoam.products.batch.service.products.ProductJobExecutionListener;
 import javax.sql.DataSource;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -22,8 +22,11 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 public class BatchConfiguration {
   @Bean
   Job csvToDbJob(
-      JobRepository jobRepository, Step step, JobCompletionNotificationListener listener) {
-    return new JobBuilder("csvToDbJob", jobRepository).listener(listener).start(step).build();
+      JobRepository jobRepository, Step step, ProductJobExecutionListener jobExecutionListener) {
+    return new JobBuilder("csvToDbJob", jobRepository)
+        .listener(jobExecutionListener)
+        .start(step)
+        .build();
   }
 
   @Bean
@@ -48,20 +51,22 @@ public class BatchConfiguration {
         .resource(new ClassPathResource("csv/products.csv"))
         .linesToSkip(1)
         .delimited()
+        .delimiter(",")
+        .quoteCharacter('"')
         .names(
-            "Index",
-            "Title",
-            "Description",
-            "Brand",
-            "Category",
-            "Price",
-            "Currency",
-            "Stock",
-            "EAN",
-            "Color",
-            "Size",
-            "Availability",
-            "Internal ID")
+            "index",
+            "title",
+            "description",
+            "brand",
+            "category",
+            "price",
+            "currency",
+            "stock",
+            "ean",
+            "color",
+            "size",
+            "availability",
+            "internalId")
         .targetType(Product.class)
         .build();
   }

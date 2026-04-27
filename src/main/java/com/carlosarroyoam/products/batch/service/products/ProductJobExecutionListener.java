@@ -1,4 +1,4 @@
-package com.carlosarroyoam.products.batch.service.listeners;
+package com.carlosarroyoam.products.batch.service.products;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,12 +9,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
-public class JobCompletionNotificationListener implements JobExecutionListener {
-  private static final Logger log =
-      LoggerFactory.getLogger(JobCompletionNotificationListener.class);
+public class ProductJobExecutionListener implements JobExecutionListener {
+  private static final Logger log = LoggerFactory.getLogger(ProductJobExecutionListener.class);
   private final JdbcTemplate jdbcTemplate;
 
-  public JobCompletionNotificationListener(JdbcTemplate jdbcTemplate) {
+  public ProductJobExecutionListener(JdbcTemplate jdbcTemplate) {
     this.jdbcTemplate = jdbcTemplate;
   }
 
