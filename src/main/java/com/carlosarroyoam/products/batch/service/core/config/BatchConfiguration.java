@@ -76,9 +76,9 @@ public class BatchConfiguration {
     return new JdbcBatchItemWriterBuilder<Product>()
         .sql(
             """
-			INSERT INTO products (title, description, brand, category, price, currency, stock, ean, color, size, availability)
-			VALUES (:title, :description, :brand, :category, :price, :currency, :stock, :ean, :color, :size, :availability)
-			""")
+            INSERT INTO products (title, description, brand, category, price, currency, stock, ean, color, size, availability)
+            VALUES (:title, :description, :brand, :category, :price, :currency, :stock, :ean, :color, :size, :availability)
+            """)
         .dataSource(datasource)
         .beanMapped()
         .build();

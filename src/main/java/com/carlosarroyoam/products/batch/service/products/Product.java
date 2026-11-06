@@ -23,8 +23,28 @@ public class Product {
 
   @Override
   public String toString() {
-    return "Product [title=" + title + ", description=" + description + ", brand=" + brand
-        + ", category=" + category + ", price=" + price + ", currency=" + currency + ", stock=" + stock + ", ean=" + ean
-        + ", color=" + color + ", size=" + size + ", availability=" + availability + "]";
+    return "Product [title="
+        + title
+        + ", description="
+        + description
+        + ", brand="
+        + brand
+        + ", category="
+        + category
+        + ", price="
+        + price
+        + ", currency="
+        + currency
+        + ", stock="
+        + stock
+        + ", ean="
+        + ean
+        + ", color="
+        + color
+        + ", size="
+        + size
+        + ", availability="
+        + availability
+        + "]";
   }
 }
